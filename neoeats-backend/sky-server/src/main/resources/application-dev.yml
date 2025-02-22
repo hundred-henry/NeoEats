@@ -6,9 +6,15 @@ sky:
     database: sky_take_out
     username: root
     password: ${DB_PASSWORD}
+#    password: whj170106
 
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
     access-key-id: ${ALI_ACCESS_KEY_ID}
     access-key-secret: ${ALI_ACCESS_KEY_SECRET}
     bucket-name: neo-eats
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
