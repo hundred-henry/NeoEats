@@ -48,4 +48,20 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <select id="list" resultType="Dish" parameterType="Dish">
+        SELECT * FROM dish
+        <where>
+            <if test="name != null">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
 </mapper>
