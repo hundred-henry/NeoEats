@@ -39,7 +39,7 @@ public class DishController {
         dishService.saveWithFlavor(dishDTO);
 
         String key = "dish_" + dishDTO.getCategoryId();
-        redisTemplate.delete(key);
+        cleanCache(key);
         return Result.success();
     }
 
@@ -56,8 +56,7 @@ public class DishController {
         dishService.deleteBatch(ids);
 
         //将所有菜品缓存数据都清理掉
-        Set keys = redisTemplate.keys("dish_*");
-        redisTemplate.delete(keys);
+        cleanCache("dish_*");
         return Result.success();
     }
 
@@ -66,8 +65,7 @@ public class DishController {
     public Result<DishVO> getById(@PathVariable Long id) {
         DishVO dishVO = dishService.getByIdWithFlavor(id);
 
-        Set keys = redisTemplate.keys("dish_*");
-        redisTemplate.delete(keys);
+        cleanCache("dish_*");
         return Result.success(dishVO);
     }
 
@@ -79,8 +77,11 @@ public class DishController {
     }
 
     @PostMapping("status/{status}")
+    @ApiOperation("菜品起售停售")
     public Result<String> startOrStop(@PathVariable Integer status, Long id) {
         dishService.startOrStop(status, id);
+
+        cleanCache("dish_*");
         return Result.success();
     }
 
@@ -94,5 +95,14 @@ public class DishController {
     public Result<List<Dish>> list(Long categoryId) {
         List<Dish> list = dishService.list(categoryId);
         return Result.success(list);
+    }
+
+    /**
+     * 清理缓存数据
+     * @param pattern
+     */
+    private void cleanCache(String pattern) {
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
     }
 }
