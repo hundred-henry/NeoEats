@@ -29,4 +29,6 @@ public interface SetmealService {
      * @return
      */
     List<DishItemVO> getDishItemById(Long id);
+
+    void startOrStop(Integer status, Long id);
 }

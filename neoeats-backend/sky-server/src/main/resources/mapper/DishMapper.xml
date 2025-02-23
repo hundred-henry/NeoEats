@@ -64,4 +64,11 @@
         </where>
         ORDER BY create_time DESC
     </select>
+
+    <!--    根据套餐id查询菜品-->
+    <select id="getBySetmealId" resultType="com.sky.entity.Dish">
+        SELECT d.*
+        FROM dish d, setmeal_dish sd
+        WHERE d.id = sd.dish_id AND sd.setmeal_id = #{id}
+    </select>
 </mapper>
