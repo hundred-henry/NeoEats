@@ -23,6 +23,7 @@ public class SkyApplication {
         System.setProperty("ALI_ACCESS_KEY_SECRET", dotenv.get("ALI_ACCESS_KEY_SECRET"));
         System.setProperty("WECHAT_APPID", dotenv.get("WECHAT_APPID"));
         System.setProperty("WECHAT_KEY_SECRET", dotenv.get("WECHAT_KEY_SECRET"));
+        System.setProperty("BAIDU_AK", dotenv.get("BAIDU_AK"));
 
         SpringApplication.run(SkyApplication.class, args);
         log.info("server started");

@@ -21,3 +21,6 @@ sky:
   wechat:
     appid: ${WECHAT_APPID}
     secret: ${WECHAT_KEY_SECRET}
+
+  baidu:
+    ak: ${BAIDU_AK}
