@@ -71,4 +71,16 @@
         FROM dish d, setmeal_dish sd
         WHERE d.id = sd.dish_id AND sd.setmeal_id = #{id}
     </select>
+
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
+    </select>
 </mapper>
